@@ -47,9 +47,14 @@ db.collection('products').doc('FNFqop0KgKpocmY8UywG').update({
 
 //how to get a whole collection
 db.collection('products').get()
-.then(collection => {
-  const productList = collection.docs.map(doc => ({...doc.data(), id: doc.id}))
-  console.table(productList)
+  .then(collection => {
+    const productList = collection.docs.map(doc => ({...doc.data(), id: doc.id}))
+    console.table(productList)
 })
 .catch(console.log)
 
+//We can rewrite this using async
+const collection = await db.collection('products').get()
+  .catch(console.log)
+const productList = collection.docs.map(doc => ({...doc.data(), id: doc.id}));
+console.log(productList);
